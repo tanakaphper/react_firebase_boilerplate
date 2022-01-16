@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header/Header";
+import {MediaQueryProvider} from "./contexts/MediaQuery";
+import {BrowserRouter} from "react-router-dom";
+import RouteGroup from "./components/Routes/RouteGroup";
+import {ThemeProvider} from "@mui/material/styles";
+import {AuthProvider} from "./contexts/AuthProvider";
+import theme from "./theme";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <MediaQueryProvider>
+            <BrowserRouter>
+              <Header />
+              <RouteGroup/>
+            </BrowserRouter>
+          </MediaQueryProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </div>
   );
 }
